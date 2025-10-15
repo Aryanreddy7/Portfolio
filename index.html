@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aryan Surya Reddy S | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600,700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html[data-theme='dark'] body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top left, #1f2235, #121212);
+      color: #eaeaea;
+      scroll-behavior: smooth;
+    }
+    a { text-decoration: none; color: inherit; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #151526;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #bb86fc;
+    }
+    #hamburger {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: #bb86fc;
+      cursor: pointer;
+      display: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      padding: 6px 14px;
+      border-radius: 18px;
+      color: #dadbf3;
+      background: rgba(255,255,255,0.05);
+      transition: all 0.25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #bb86fc;
+      color: #121212;
+    }
+    @media (max-width: 768px) {
+      #hamburger { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 12px 0;
+      }
+      .nav-links.active {
+        display: flex;
+        background-color: #1d1d2f;
+        border-top: 1px solid #333;
+      }
+      .nav-links li {
+        text-align: center;
+        padding: 10px 0;
+      }
+    }
+    .hero {
+      padding: 80px 20px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+    }
+    .highlight { color: #bb86fc; }
+    .role {
+      margin-top: 10px;
+      height: 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ccc;
+    }
+    #typewriter {
+      border-right: 2px solid #bb86fc;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink 0.75s step-end infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .cta-btn {
+      margin-top: 30px;
+      padding: 12px 26px;
+      background: linear-gradient(to right, #a18cd1, #fbc2eb, #bb86fc);
+      color: #18192a;
+      border-radius: 24px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      box-shadow: 0 6px 18px rgba(187,134,252,0.25);
+      transition: transform 0.2s ease-in-out;
+    }
+    .cta-btn:hover {
+      background: linear-gradient(to right, #bb86fc, #a18cd1);
+      transform: scale(1.05);
+    }
+    .socials {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    .socials a {
+      color: #bb86fc;
+      font-size: 1.4rem;
+      transition: color 0.25s ease;
+    }
+    .socials a:hover { color: #fbc2eb; }
+    .profile-pic-container {
+      margin-top: 25px;
+    }
+    .profile-pic {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #bb86fc;
+      box-shadow: 0 0 16px rgba(187,134,252,0.4);
+    }
+    main.container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    section {
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section h2 {
+      font-size: 2rem;
+      color: #bb86fc;
+      border-left: 5px solid #bb86fc;
+      padding-left: 14px;
+      margin-bottom: 20px;
+    }
+    .description {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 1rem;
+      max-width: 800px;
+    }
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pill {
+      background: #292a3d;
+      color: #bb86fc;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-hover:hover {
+      background-color: #3a3b4f;
+      color: #fff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: #1d1e2e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+    .project-hover:hover {
+      transform: scale(1.05);
+      background-color: #252636;
+      transition: 0.3s ease;
+      box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
+    }
+    .glass {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .project-card h4 {
+      margin-bottom: 6px;
+      color: #bb86fc;
+    }
+    .project-card span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ddd;
+    }
+    .project-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+      color: #aaa;
+    }
+    ul.timeline {
+      list-style: none;
+      padding-left: 0;
+      line-height: 1.6;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    .wave {
+      width: 100%;
+      height: 60px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C30,30 90,-30 120,0 L120,30 L0,30 Z" fill="%23bb86fc"/></svg>');
+      background-size: cover;
+    }
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #bb86fc;
+      color: #121212;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(187, 134, 252, 0.4);
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle:hover {
+      background: #a18cd1;
+      transform: scale(1.1);
+    }
+
+    /* ✅ Light theme overrides */
+    html[data-theme='light'] body {
+      background: radial-gradient(circle at top left, #ffffff, #f0f0f0);
+      color: #111;
+    }
+    html[data-theme='light'] .description,
+    html[data-theme='light'] .timeline {
+      color: #333;
+    }
+    html[data-theme='light'] .role {
+      color: #444;
+    }
+    html[data-theme='light'] .highlight,
+    html[data-theme='light'] .nav-logo {
+      color: #6a1b9a;
+    }
+    html[data-theme='light'] section h2 {
+      color: #6a1b9a;
+      border-left-color: #6a1b9a;
+    }
+    html[data-theme='light'] .nav-links a {
+      color: #333;
+      background: rgba(0,0,0,0.05);
+    }
+    html[data-theme='light'] .nav-links a:hover,
+    html[data-theme='light'] .nav-links a.active {
+      background: #bb86fc;
+      color: #fff;
+    }
+    html[data-theme='light'] .project-card {
+      background: #f3f3f3;
+      color: #111;
+    }
+    html[data-theme='light'] .project-card span,
+    html[data-theme='light'] .project-card ul {
+      color: #444;
+    }
+    html[data-theme='light'] .pill {
+      background-color: #e0e0e0;
+      color: #444;
+    }
+    html[data-theme='light'] .glass {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    html[data-theme='light'] .socials a {
+      color: #6a1b9a;
+    }
+    html[data-theme='light'] .socials a:hover {
+      color: #9c27b0;
+    }
+    html[data-theme='light'] footer {
+      color: #555;
+    }
+    html[data-theme='light'] nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+html[data-theme='light'] #hamburger {
+  color: #6a1b9a;
+}
+
+html[data-theme='light'] .nav-logo {
+  color: #6a1b9a;
+}
+
+html[data-theme='light'] .nav-links a {
+  color: #333;
+}
+
+html[data-theme='light'] .nav-links a:hover,
+html[data-theme='light'] .nav-links a.active {
+  background: #bb86fc;
+  color: #fff;
+}
+/* Contact Form Styling */
+.contact-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.contact-form .form-group {
+  margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: #292a3d;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+html[data-theme='light'] .contact-form input,
+html[data-theme='light'] .contact-form textarea {
+  background-color: #e0e0e0;
+  color: #111;
+}
+
+
+  </style>
+</head>
+<body>
+  <script>
+    const html = document.documentElement;
+    const storedTheme = localStorage.getItem("theme") || "dark";
+    html.setAttribute("data-theme", storedTheme);
+
+    const themeBtn = document.getElementById("themeBtn");
+    function updateToggleIcon(theme) {
+      document.getElementById("themeBtn").innerHTML = theme === "dark"
+        ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    function toggleTheme() {
+      const currentTheme = html.getAttribute("data-theme");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      html.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateToggleIcon(newTheme);
+    }
+  </script>
+
+  <nav>
+    <!-- <div class="nav-logo">Aryan.</div> -->
+    <button id="hamburger"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about-section">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#internships">Internships</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#languages">Languages</a></li>
+    </ul>
+  </nav>
+  <section id="home" class="hero">
+    <h1>Hello, I'm <span class="highlight">Aryan Surya Reddy S</span></h1>
+    <div class="role"><span id="typewriter"></span></div>
+    <div class="profile-pic-container">
+      <img src="IMG_20250605_234735.jpg" alt="Aryan Surya Reddy S" class="profile-pic" />
+    </div>
+    <!-- <a href="Aryan Surya Reddy S Resume.pdf" class="cta-btn" download target="_blank"> -->
+      <a  href="Aryan Surya Reddy S Resume.pdf"  class="cta-btn" target="_blank" rel="noopener">
+
+ Resume
+      <!-- <i class="fas fa-file-download"></i> Resume -->
+    </a>
+    <div class="socials">
+      <a href="https://wa.me/919606628566" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://github.com/Aryanreddy7" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:aryanreddy126@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="about-section">
+      <h2>About Me</h2>
+      <p class="description">
+        I am a detail-oriented and enthusiastic software developer with hands-on experience in building responsive web applications using Java, JSP, Servlets, and JDBC. I have a strong foundation in full-stack development and have worked on real-time web apps, database-driven projects, and system security concepts. My passion lies in clean code, performance optimization, and exploring creative UI/UX designs that enhance user experience.
+      </p>
+    </section>
+
+
+  <!-- <main class="container"> -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="pills-container">
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" style="height:16px;"> Java
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" style="height:16px;"> HTML
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" style="height:16px;"> CSS
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" style="height:16px;"> JavaScript
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://img.icons8.com/ios-filled/50/000000/sql.png" alt="SQL" style="height:16px; vertical-align:middle;"> SQL
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" style="height:16px;"> Bootstrap
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg " alt="Spring" style="height:16px;"> Spring
+        </span>
+        
+        <span class="pill skill-hover"><img src="https://img.icons8.com/?size=100&id=13441&format=png&color=ffffff" alt="JSP Icon" style="height:16px;"> JSP and Servlets</span>
+        <!-- <span class="pill skill-hover">
+          <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Database Cylinder" style="height:16px; vertical-align:middle;"> Database
+        </span> -->
+        <span class="pill skill-hover"><i class="fas fa-database"></i> JDBC</span>
+        
+        
+        
+        
+        
+        
+      <span class="pill skill-hover">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg" alt="OpenCV" style="height:16px;"> OpenCV
+      </span>
+      
+        <!-- <span class="pill skill-hover">Servlets</span> -->
+
+        </span>
+        <!-- <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" style="height:16px;"> Python (basic)
+        </span> -->
+      </div>
+    </section>
+    
+    <section id="tools">
+      <h2>Tools</h2>
+      <div class="pills-container">
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" alt="Tomcat" style="height:16px;"> Apache Tomcat
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" style="height:16px;"> VS Code
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg" alt="Eclipse" style="height:16px;"> Eclipse
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Notepad%2B%2B_Logo.svg" 
+               alt="Notepad++" style="height:20px; vertical-align:middle; margin-right:5px;">
+          Notepad++
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ" style="height:16px;"> IntelliJ IDEA
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="height:16px;"> MySQL
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" style="height:16px;"> Git
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height:16px;"> GitHub
+        </span>
+        <span class="pill skill-hover">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" alt="Maven" style="height:16px;"> Maven
+        </span>
+      </div>
+    </section>
+    
+    
+
+    
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card project-hover">
+          <h4>Tourism Website</h4>
+          <span>HTML, CSS, JS</span>
+          <ul>
+            <li>Responsive UI with interactive design</li>
+            <li>Integrated maps and location features</li>
+            <li>Simple booking interface</li>
+          </ul>
+        </div>
+        <div class="project-card project-hover">
+          <h4>Employee Management</h4>
+          <span>MySQL, DBMS</span>
+          <ul>
+            <li>Admin panel with CRUD operations</li>
+            <li>Efficient MySQL data handling</li>
+            <li>Secure login authentication</li>
+          </ul>
+        </div>
+        <div class="project-card project-hover">
+          <h4>Vehicle Plate Detection</h4>
+          <span>OpenCV, Python</span>
+          <ul>
+            <li>Real-time license plate recognition</li>
+            <li>Uses image & video processing</li>
+            <li>High detection accuracy</li>
+          </ul>
+        </div>
+        <div class="project-card project-hover">
+          <h4>Customer Management System</h4>
+          <span>Java, JSP, MySQL</span>
+          <ul>
+            <li>Layered architecture implementation</li>
+            <li>Bootstrap UI with JSP backend</li>
+            <li>CRUD operations using JDBC</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="internships">
+      <h2>Internships</h2>
+      <ul class="timeline">
+        <li><b>Software Developer – X-WorkZ, Bengaluru</b><br>Feb 2025 – Present<br>Full stack with Java, JSP, JDBC, MySQL.</li>
+        <li><b>Frontend Intern – Innovaskill</b><br>Oct 2023 – Nov 2023</li>
+        <li><b>System Security Intern – Sirintel</b><br>Oct 2022</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <p class="description">
+        <strong>B.E. (Computer Science)</strong><br />
+        GM Institute of Technology, Davangere<br />
+        2021 – 2025
+      </p>
+    </section>
+
+    <section id="languages">
+      <h2>Languages</h2>
+      <div class="pills-container">
+        <span class="pill">English</span>
+        <span class="pill">Hindi</span>
+        <span class="pill">Telugu</span>
+        <span class="pill">Kannada</span>
+      </div>
+    </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+          <h2>Contact Me</h2>
+          <p class="description">
+            Have a question, project idea, or just want to say hello? Fill out the form below and I'll get back to you as soon as possible.
+          </p>
+          <form id="contactForm" class="contact-form glass">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+          
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="cta-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+          </form>
+          
+          <!-- ✅ Success message container -->
+          <p id="formStatus" style="margin-top:10px; text-align:center;"></p>
+          
+        </section>
+    
+    
+  </main>
+
+  <div class="wave"></div>
+  <footer>&copy; 2025 Aryan Surya Reddy S</footer>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+    <i class="fas fa-sun"></i>
+  </button>
+
+  <script>
+    const roles = ["Java Full Stack Intern "];
+    let i = 0, j = 0, isDeleting = false, current = "", speed = 100;
+    const typewriter = document.getElementById("typewriter");
+
+    function type() {
+      const role = roles[i];
+      if (!isDeleting && j <= role.length) {
+        current = role.substring(0, j++);
+      } else if (isDeleting && j >= 0) {
+        current = role.substring(0, j--);
+      }
+
+      typewriter.textContent = current;
+
+      if (!isDeleting && j === role.length) {
+        isDeleting = true;
+        setTimeout(type, 1000);
+      } else if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % roles.length;
+        setTimeout(type, 300);
+      } else {
+        setTimeout(type, isDeleting ? speed / 2 : speed);
+      }
+    }
+    type();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll("section").forEach(sec => observer.observe(sec));
+
+    updateToggleIcon(html.getAttribute("data-theme"));
+
+    document.getElementById("hamburger").onclick = () => {
+      document.getElementById("navLinks").classList.toggle("active");
+    };
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop normal form submit
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch("https://formsubmit.co/aryanreddy126@gmail.com", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      document.getElementById("formStatus").textContent = "✅ Message sent successfully!";
+      form.reset();
+    } else {
+      document.getElementById("formStatus").textContent = "❌ Something went wrong. Please try again.";
+    }
+  })
+  .catch(() => {
+    document.getElementById("formStatus").textContent = "❌ Network error. Please try again.";
+  });
+});
+</script>
+
+</body>
+</html>
